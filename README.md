@@ -19,6 +19,7 @@ Open the applet. Create a new file that'll hold all your settings for a project 
 * Options for file extension and/or filename prefix
 * Specify the number of files to retrieve from each source folder
 * Alternative criteria for copying files besides last modified
+* Expanded OS support
 
 ## Why make this?
 
@@ -28,4 +29,4 @@ But usually I also want to keep a folder of all recent mixes available for the c
 
 Well, no more. We hold so much in our heads as creative professionals working on a project that to offload a little strain on our brains, no matter how small, is beneficial. Why not respect our own time and mental energy by automating away anything we can?
 
-You can also use this if you're not an audio engineer or producer, for anything. This was just my use case for making this but it'll work the same for whatever. I'll probably add some more features in the future in order to allow for more general uses for this tool. As soon as I can think of what those might be. Feel free to submit a feature request if you have an idea.
+As you can tell I built this primarily with my specific use case in mind, so if you have an idea that would make it more useful in more situations, feel free to submit a feature request!
