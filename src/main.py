@@ -10,54 +10,68 @@ def submitForm():
 window = tk.Tk() #creates window
 window.title('cnsolidtr') #sets window title
 
-# lbl_greeting = tk.Label(
-# 	text="welcme 2 cnsolidtr",
-# 	fg="white",
-# 	bg="black")
-# lbl_greeting.pack() #pack function adds widgets to window and resizes to fit
-
+frame1 = tk.Frame(master=window, height=100)
+frame1.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
 btn_load = tk.Button(
+	master=frame1,
 	text='Load Config',
 	height='1',
 	width='20')
 lbl_OR = tk.Label(
+	master=frame1,
 	text='-OR-',
 	height='1',
-	width='10')
+	width='5')
 btn_saveAs = tk.Button(
+	master=frame1,
 	text='Save Config As...',
 	height='1',
 	width='20')
-btn_load.pack()
-lbl_OR.pack()
-btn_saveAs.pack()
+btn_load.grid(column=0, row=0, padx=5, pady=2)
+lbl_OR.grid(column=1, row=0, padx=5, pady=2)
+btn_saveAs.grid(column=2, row=0, padx=5, pady=2)
 
+frame2 = tk.Frame(master=window, width=200, height=100)
+frame2.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
 lbl_destination = tk.Label(
+	master=frame2,
 	text='Select destination folder:')
 btn_selectDestFolder = tk.Button(
+	master=frame2,
 	text='...',
 	height='1',
 	width='2')
 ent_destination = tk.Entry(
-	width='30')
-lbl_destination.pack()
-btn_selectDestFolder.pack()
-ent_destination.pack()
+	master=frame2,
+	width='25')
+lbl_destination.grid(column=0, row=1, padx=5, pady=2)
+btn_selectDestFolder.grid(column=1, row=1, pady=2)
+ent_destination.grid(column=2, row=1, padx=1, pady=2)
 
+frame3 = tk.Frame(master=window, width=200, height=100)
+frame3.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
 lbl_rules = tk.Label(
+	master=frame3,
 	text='Copy:')
 chk_newestFiles = tk.Checkbutton(
-	text='newest files')
-lbl_rules.pack()
-chk_newestFiles.pack()
+	master=frame3,
+	text='newest files ')
+chk_otherOption = tk.Checkbutton(
+	master=frame3,
+	text='other option')
+lbl_rules.grid(column=0, row=2, padx=5, pady=2)
+chk_newestFiles.grid(column=1, row=2, padx=5, pady=2)
+chk_otherOption.grid(column=2, row=2, padx=5, pady=2)
 
 lbl_extension = tk.Label(
+	master=frame3,
 	text='Ending with')
 ent_extension = tk.Entry(
+	master=frame3,
 	width='2')
 #buttons that fill in some suggested extensions?
-lbl_extension.pack()
-ent_extension.pack()
+lbl_extension.grid(column=3, row=2, padx=0, pady=2)
+ent_extension.grid(column=4, row=2, padx=0, pady=2)
 
 lbl_sources = tk.Label(
 	text='From these locations:')

@@ -19,11 +19,12 @@ Open the applet. Create a new file that'll hold all your settings for a project 
 * Options for file extension and/or filename prefix
 * Specify the number of files to retrieve from each source folder
 * Alternative criteria for copying files besides last modified
+* Responsive UI
 * Expanded OS support
 
 ## Why make this?
 
-I've been an audio engineer for the past six or so years, the most common DAW found in professional recording studios is Pro Tools. Pro Tools, unlike many popular DAWs, provides a default location within every session file to store all *bounces* of a track(i.e. *mixes* or exports). While using it is optional, many prefer to because it keeps things neat and tidy when all mixed versions of a song can be found in a consistent location within its session folder.
+I've been a professional audio engineer for the past several years, and the most common Digital Audio Workstation (DAW) found in most recording studios is Pro Tools. Pro Tools, unlike many popular DAWs, provides a default location within every session file to store all *bounces* of a track(i.e. *mixes* or exports). While using it is optional, many prefer to because it keeps things neat and tidy when all mixed versions of a song can be found in a consistent location within its session folder.
 
 But usually I also want to keep a folder of all recent mixes available for the client. Typically I'd do this by hand, but it can be easy to make mistakes by forgetting to copy a new bounce of a song into the folder, or having to folder-dive to verify that all mixes are the most recent.
 
