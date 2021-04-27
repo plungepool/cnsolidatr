@@ -1,5 +1,7 @@
 #LIBRARIES
-import tkinter as tk #import tk
+# import tkinter as tk #import tk
+from tkinter import *
+from tkinter import font
 
 #FUNCTIONS
 def submitForm():
@@ -7,103 +9,122 @@ def submitForm():
 	exit()
 
 #MAIN
-window = tk.Tk() #creates window
-window.title('cnsolidtr') #sets window title
+root = Tk()
+root.title('cnsolidtr') #sets window title
+myFont = font.Font(family='Courier', size='12', weight='bold')
 
-frame1 = tk.Frame(master=window, height=100)
-frame1.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
-btn_load = tk.Button(
-	master=frame1,
+#Frame Setup
+frame=Frame(root)
+Grid.rowconfigure(root, 0, weight=1)
+Grid.columnconfigure(root, 0, weight=1)
+frame.grid(row=0, column=0, sticky=N+S+E+W)
+
+grid=Frame(frame)
+grid.grid(sticky=N+S+E+W, column=3, row=5, columnspan=1)
+
+Grid.columnconfigure(frame, 0, weight=1)
+Grid.columnconfigure(frame, 1, weight=1)
+Grid.columnconfigure(frame, 2, weight=1)
+
+Grid.rowconfigure(frame, 0, weight=1)
+
+# Responsive Frame
+for x in range(3):
+  Grid.columnconfigure(frame, x, weight=1)
+for y in range(5):
+  Grid.rowconfigure(frame, y, weight=1)
+
+#Row 0
+btn_load = Button(
+	master=frame,
 	text='Load Config',
+	# fg='black',
 	height='1',
 	width='20')
-lbl_OR = tk.Label(
-	master=frame1,
+lbl_OR = Label(
+	master=frame,
 	text='-OR-',
 	height='1',
 	width='5')
-btn_saveAs = tk.Button(
-	master=frame1,
+btn_saveAs = Button(
+	master=frame,
 	text='Save Config As...',
 	height='1',
 	width='20')
-btn_load.grid(column=0, row=0, padx=5, pady=2)
-lbl_OR.grid(column=1, row=0, padx=5, pady=2)
-btn_saveAs.grid(column=2, row=0, padx=5, pady=2)
+btn_load['font'] = myFont
+lbl_OR['font'] = myFont
+btn_saveAs['font'] = myFont
+btn_load.grid(column=0, row=0, sticky='nwse')
+lbl_OR.grid(column=1, row=0, sticky='nwse')
+btn_saveAs.grid(column=2, row=0, sticky='nwse')
 
-frame2 = tk.Frame(master=window, width=200, height=100)
-frame2.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
-lbl_destination = tk.Label(
-	master=frame2,
+# Row 1
+lbl_destination = Label(
+	master=frame,
 	text='Select destination folder:')
-btn_selectDestFolder = tk.Button(
-	master=frame2,
+btn_selectDestFolder = Button(
+	master=frame,
 	text='...',
 	height='1',
-	width='2')
-ent_destination = tk.Entry(
-	master=frame2,
+	width='3')
+ent_destination = Entry(
+	master=frame,
 	width='25')
-lbl_destination.grid(column=0, row=1, padx=5, pady=2)
-btn_selectDestFolder.grid(column=1, row=1, pady=2)
-ent_destination.grid(column=2, row=1, padx=1, pady=2)
+lbl_destination['font'] = myFont
+btn_selectDestFolder['font'] = myFont
+ent_destination['font'] = myFont
+lbl_destination.grid(column=0, row=1, sticky='nwse', padx=2, pady=2)
+btn_selectDestFolder.grid(column=1, row=1, padx=2, pady=2)
+ent_destination.grid(column=2, row=1, sticky='nwse', padx=2, pady=2)
 
-frame3 = tk.Frame(master=window, width=200, height=100)
-frame3.pack(fill=tk.BOTH, side=tk.TOP, expand=True)
-lbl_rules = tk.Label(
-	master=frame3,
-	text='Copy:')
-chk_newestFiles = tk.Checkbutton(
-	master=frame3,
-	text='newest files ')
-chk_otherOption = tk.Checkbutton(
-	master=frame3,
-	text='other option')
-lbl_rules.grid(column=0, row=2, padx=5, pady=2)
-chk_newestFiles.grid(column=1, row=2, padx=5, pady=2)
-chk_otherOption.grid(column=2, row=2, padx=5, pady=2)
-
-lbl_extension = tk.Label(
-	master=frame3,
-	text='Ending with')
-ent_extension = tk.Entry(
-	master=frame3,
-	width='2')
-#buttons that fill in some suggested extensions?
-lbl_extension.grid(column=3, row=2, padx=0, pady=2)
-ent_extension.grid(column=4, row=2, padx=0, pady=2)
-
-lbl_sources = tk.Label(
-	text='From these locations:')
-btn_selectSourceFolder = tk.Button(
+# Row 2 - 3
+lbl_sources = Label(
+	master=frame,
+	text='Copy newest files from these locations:')
+btn_selectSourceFolder = Button(
+	master=frame,
 	text='Add source folder...')
-txt_sources = tk.Text(
-	height='8',
-	width='40')
-lbl_sources.pack()
-btn_selectSourceFolder.pack()
-txt_sources.pack()
+txt_sources = Text(
+	master=frame,
+	height='4',
+	width='25')
+lbl_sources['font'] = myFont
+btn_selectSourceFolder['font'] = myFont
+txt_sources['font'] = myFont
+lbl_sources.grid(column=0, columnspan=2, row=2, sticky='nwse')
+btn_selectSourceFolder.grid(column=2, row=2, sticky='nwse')
+txt_sources.grid(column=0, columnspan=3, row=3, sticky='nwse', padx=5, pady=1)
 
-lbl_options = tk.Label(
+# Row 4 - 5
+lbl_options = Label(
+	master=frame,
 	text='Options:')
-chk_deleteOld = tk.Checkbutton(
+chk_deleteOld = Checkbutton(
+	master=frame,
 	text='Delete old files in destination folder')
-chk_backupOld = tk.Checkbutton(
+chk_backupOld = Checkbutton(
+	master=frame,
 	text='Backup old files in destination folder')
-lbl_options.pack()
-chk_deleteOld.pack()
-chk_backupOld.pack()
+lbl_options['font'] = myFont
+chk_deleteOld['font'] = myFont
+chk_backupOld['font'] = myFont
+lbl_options.grid(column=0, row=4)
+chk_deleteOld.grid(column=1, columnspan=2, row=4)
+chk_backupOld.grid(column=1, columnspan=2, row=5)
 
-btn_submit = tk.Button(
+# Row 6
+btn_submit = Button(
+	master=frame,
 	text='CNSOLIDAT',
 	default='active',
 	height='1',
 	width='50',
 	command=submitForm)
-btn_submit.pack()
+btn_submit['font'] = myFont
+btn_submit.grid(column=0, columnspan=3, row=6, padx=5, pady=5)
 
-window.mainloop() #waits for user input/events, any code after is blocked
-									#until window is closed
+root.mainloop() # waits for user input/events, any code after is blocked
+									# until window is closed
 
 #Open the applet. 
 

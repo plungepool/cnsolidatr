@@ -7,7 +7,7 @@ WITHOUT PROPER BACKUPS, IT'S NOT A QUESTION OF 'IF' YOU'LL LOSE DATA ONE DAY - I
 
 ## What is this?
 
-cnsolidatr creates reusable templates for repetitive tasks involving copying and bringing together files from multiple sources that meet user-defined parameters. This is most useful for professionals in creative fields that involve keeping a folder intended for a client up-to-date with the latest versions of rendered files.
+cnsolidatr creates reusable templates for repetitive tasks involving copying and bringing together files from multiple sources that meet user-defined parameters, ideal for professionals in creative fields that involve keeping a folder intended for a client up-to-date with the latest versions of rendered files.
 
 ## How does it work?
 
