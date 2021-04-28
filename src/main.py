@@ -2,16 +2,42 @@
 # import tkinter as tk #import tk
 from tkinter import *
 from tkinter import font
+from tkinter import filedialog
+from tkinter import messagebox
+import subprocess
+
+#CONFIG FILE
 
 #FUNCTIONS
+def selectDestination():
+	directory = filedialog.askdirectory()
+	destinationDir.set(directory)
+
+def selectSource():
+	directory = filedialog.askdirectory()
+	txt_sources.insert(END, directory)
+	txt_sources.insert(END, '\n')
+
 def submitForm():
-	#ent_destination.get()
+	configFile = open("/Users/bench-pc/Dropbox/Programming/Project Repos/cnsolidatr/src/config.txt", "w")
+	configFile.write(ent_destination.get() + "\n")
+	configFile.close()
+	configFile = open("/Users/bench-pc/Dropbox/Programming/Project Repos/cnsolidatr/src/config.txt", "a")
+	configFile.write(txt_sources.get("1.0","end-1c"))
+	configFile.write("#end")
+	configFile.close()
+	subprocess.call(['sh', 'cd /Users/bench-pc/Dropbox/Programming/Project\ Repos/cnsolidatr/src/']) #, './configFile.sh'
 	exit()
 
 #MAIN
 root = Tk()
 root.title('cnsolidtr') #sets window title
 myFont = font.Font(family='Courier', size='12', weight='bold')
+
+#VARS
+destinationDir = StringVar()
+destinationDir.set(" ")
+sourceDir = StringVar()
 
 #Frame Setup
 frame=Frame(root)
@@ -34,7 +60,7 @@ for x in range(3):
 for y in range(5):
   Grid.rowconfigure(frame, y, weight=1)
 
-#Row 0
+# Row 0 : Save/Load
 btn_load = Button(
 	master=frame,
 	text='Load Config',
@@ -54,11 +80,11 @@ btn_saveAs = Button(
 btn_load['font'] = myFont
 lbl_OR['font'] = myFont
 btn_saveAs['font'] = myFont
-btn_load.grid(column=0, row=0, sticky='nwse')
-lbl_OR.grid(column=1, row=0, sticky='nwse')
-btn_saveAs.grid(column=2, row=0, sticky='nwse')
+btn_load.grid(column=0, row=0)
+lbl_OR.grid(column=1, row=0)
+btn_saveAs.grid(column=2, row=0)
 
-# Row 1
+# Row 1 : Set Destination
 lbl_destination = Label(
 	master=frame,
 	text='Select destination folder:')
@@ -66,24 +92,27 @@ btn_selectDestFolder = Button(
 	master=frame,
 	text='...',
 	height='1',
-	width='3')
+	width='3',
+	command=selectDestination)
 ent_destination = Entry(
 	master=frame,
-	width='25')
+	width='20',
+	textvariable=destinationDir)
 lbl_destination['font'] = myFont
 btn_selectDestFolder['font'] = myFont
 ent_destination['font'] = myFont
-lbl_destination.grid(column=0, row=1, sticky='nwse', padx=2, pady=2)
-btn_selectDestFolder.grid(column=1, row=1, padx=2, pady=2)
-ent_destination.grid(column=2, row=1, sticky='nwse', padx=2, pady=2)
+lbl_destination.grid(column=0, row=1)
+btn_selectDestFolder.grid(column=1, row=1)
+ent_destination.grid(column=2, columnspan=2, row=1)
 
-# Row 2 - 3
+# Row 2 - 3 : Sources 
 lbl_sources = Label(
 	master=frame,
 	text='Copy newest files from these locations:')
 btn_selectSourceFolder = Button(
 	master=frame,
-	text='Add source folder...')
+	text='Add source folder...',
+	command=selectSource)
 txt_sources = Text(
 	master=frame,
 	height='4',
@@ -91,11 +120,11 @@ txt_sources = Text(
 lbl_sources['font'] = myFont
 btn_selectSourceFolder['font'] = myFont
 txt_sources['font'] = myFont
-lbl_sources.grid(column=0, columnspan=2, row=2, sticky='nwse')
-btn_selectSourceFolder.grid(column=2, row=2, sticky='nwse')
+lbl_sources.grid(column=0, columnspan=2, row=2)
+btn_selectSourceFolder.grid(column=2, row=2)
 txt_sources.grid(column=0, columnspan=3, row=3, sticky='nwse', padx=5, pady=1)
 
-# Row 4 - 5
+# Row 4 - 5 : Options
 lbl_options = Label(
 	master=frame,
 	text='Options:')
@@ -112,7 +141,7 @@ lbl_options.grid(column=0, row=4)
 chk_deleteOld.grid(column=1, columnspan=2, row=4)
 chk_backupOld.grid(column=1, columnspan=2, row=5)
 
-# Row 6
+# Row 6 : Submit
 btn_submit = Button(
 	master=frame,
 	text='CNSOLIDAT',

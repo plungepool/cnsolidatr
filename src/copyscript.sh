@@ -1,8 +1,6 @@
 #!/bin/sh
 #any arguments from terminal that should be committed to var
 
-
-
 i=0
 cat config.txt | while read -r line; do #loops thru lines in config file
 	if [[ $i -eq 0 ]]; then #grabs destination from line 1
