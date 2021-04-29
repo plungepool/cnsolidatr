@@ -9,6 +9,20 @@ import subprocess
 #CONFIG FILE
 
 #FUNCTIONS
+def loadConfig():
+	global configLocation
+	loadFile = filedialog.askopenfilename()
+	configLocation = loadFile
+	#parse file and fill in fields
+	return configLocation
+
+def saveConfigAs():
+	global configLocation
+	configLocation = filedialog.asksaveasfilename()
+	configFile = open(configLocation, "x")
+	configFile.close()
+	return configLocation
+
 def selectDestination():
 	directory = filedialog.askdirectory()
 	destinationDir.set(directory)
@@ -19,14 +33,15 @@ def selectSource():
 	txt_sources.insert(END, '\n')
 
 def submitForm():
-	configFile = open("/Users/bench-pc/Dropbox/Programming/Project Repos/cnsolidatr/src/config.txt", "w")
+	global configLocation
+	configFile = open(configLocation, "w")
 	configFile.write(ent_destination.get() + "\n")
 	configFile.close()
-	configFile = open("/Users/bench-pc/Dropbox/Programming/Project Repos/cnsolidatr/src/config.txt", "a")
+	configFile = open(configLocation, "a")
 	configFile.write(txt_sources.get("1.0","end-1c"))
 	configFile.write("#end")
 	configFile.close()
-	subprocess.call(['sh', 'cd /Users/bench-pc/Dropbox/Programming/Project\ Repos/cnsolidatr/src/']) #, './configFile.sh'
+	subprocess.call(['./copyscript.sh'])
 	exit()
 
 #MAIN
@@ -35,6 +50,7 @@ root.title('cnsolidtr') #sets window title
 myFont = font.Font(family='Courier', size='12', weight='bold')
 
 #VARS
+global configLocation
 destinationDir = StringVar()
 destinationDir.set(" ")
 sourceDir = StringVar()
@@ -66,7 +82,8 @@ btn_load = Button(
 	text='Load Config',
 	# fg='black',
 	height='1',
-	width='20')
+	width='20',
+	command=loadConfig)
 lbl_OR = Label(
 	master=frame,
 	text='-OR-',
@@ -76,7 +93,8 @@ btn_saveAs = Button(
 	master=frame,
 	text='Save Config As...',
 	height='1',
-	width='20')
+	width='20',
+	command=saveConfigAs)
 btn_load['font'] = myFont
 lbl_OR['font'] = myFont
 btn_saveAs['font'] = myFont
