@@ -1,8 +1,9 @@
 #!/bin/sh
-#any arguments from terminal that should be committed to var
+options=$1
+config=$2
 
 i=0
-cat config.txt | while read -r line; do #loops thru lines in config file
+cat $config | while read -r line; do #loops thru lines in config file
 	if [[ $i -eq 0 ]]; then #grabs destination from line 1
 		echo "Destination folder is $line"
 		destination=$line
@@ -10,7 +11,7 @@ cat config.txt | while read -r line; do #loops thru lines in config file
 		#if <backup argument> set
 			#backup current files in destination to backup folder
 		#else
-		mv *.* ~/.Trash #moves all contents with file extensions to trash, excludes sub directories
+			mv *.* ~/.Trash #moves all contents with file extensions to trash, excludes sub directories
 		#fi
 	else
   	echo "Source folder is $line"

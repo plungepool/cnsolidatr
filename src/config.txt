@@ -1,4 +1,0 @@
-/Users/bench-pc/Desktop/copytest/destination
-/Users/bench-pc/Desktop/copytest/folder5
-/Users/bench-pc/Desktop/copytest/folder4
-#end
