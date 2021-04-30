@@ -60,32 +60,47 @@ def submitForm():
 #MAIN
 root = Tk()
 root.title('cnsolidtr') #sets window title
-myFont = font.Font(family='Courier', size='12', weight='bold')
+myFont = font.Font(
+	family='Courier', 
+	size='18', 
+	weight='bold')
+
+bgColor = '#457b9d'
+textColor = 'white'
+btntxtColor = 'black'
+fieldColor = "#f1faee"
+
+# bgColor = '#023047'
+# textColor = 'white'
+# btntxtColor = 'black'
+# fieldColor = "#8ecae6"
+
+# bgColor = '#f4a261'
+# textColor = '#2a9d8f'
+# btntxtColor = '#264653'
+# fieldColor = "#f8c8a0"
 
 #VARS
 global configLocation
 destinationDir = StringVar()
-destinationDir.set(" ")
+destinationDir.set("")
 sourceDir = StringVar()
 options = IntVar(None, "1")
 
 #Frame Setup
-frame=Frame(root)
+frame=Frame(root, background=bgColor)
 Grid.rowconfigure(root, 0, weight=1)
 Grid.columnconfigure(root, 0, weight=1)
 frame.grid(row=0, column=0, sticky=N+S+E+W)
 
 grid=Frame(frame)
 grid.grid(sticky=N+S+E+W, column=3, row=5, columnspan=1)
-
 Grid.columnconfigure(frame, 0, weight=1)
 Grid.columnconfigure(frame, 1, weight=1)
-Grid.columnconfigure(frame, 2, weight=1)
-
 Grid.rowconfigure(frame, 0, weight=1)
 
 # Responsive Frame
-for x in range(3):
+for x in range(2):
 	Grid.columnconfigure(frame, x, weight=1)
 for y in range(5):
 	Grid.rowconfigure(frame, y, weight=1)
@@ -94,99 +109,118 @@ for y in range(5):
 btn_load = Button(
 	master=frame,
 	text='Load Config',
-	# fg='black',
-	height='1',
+	height='2',
 	width='20',
+	highlightbackground=bgColor,
+	fg=btntxtColor,
 	command=loadConfig)
-lbl_OR = Label(
-	master=frame,
-	text='-OR-',
-	height='1',
-	width='5')
 btn_saveAs = Button(
 	master=frame,
 	text='Save Config As...',
-	height='1',
+	height='2',
 	width='20',
+	highlightbackground=bgColor,
+	fg=btntxtColor,
 	command=saveConfigAs)
 btn_load['font'] = myFont
-lbl_OR['font'] = myFont
 btn_saveAs['font'] = myFont
-btn_load.grid(column=0, row=0)
-lbl_OR.grid(column=1, row=0)
-btn_saveAs.grid(column=2, row=0)
+btn_load.grid(column=0, row=0, padx=8, pady=1)
+btn_saveAs.grid(column=1, row=0, padx=8, pady=1)
 
 # Row 1 : Set Destination
 lbl_destination = Label(
 	master=frame,
-	text='Select destination folder:')
+	text='Select destination\nfolder:',
+	bg=bgColor,
+	fg=textColor)
 btn_selectDestFolder = Button(
 	master=frame,
 	text='...',
 	height='1',
 	width='3',
+	highlightbackground=bgColor,
+	fg=btntxtColor,
 	command=selectDestination)
 ent_destination = Entry(
 	master=frame,
-	width='20',
+	width='15',
+	highlightbackground=bgColor,
+	bg=fieldColor,
+	fg=btntxtColor,
+	relief=SUNKEN,
 	textvariable=destinationDir)
 lbl_destination['font'] = myFont
 btn_selectDestFolder['font'] = myFont
 ent_destination['font'] = myFont
-lbl_destination.grid(column=0, row=1)
-btn_selectDestFolder.grid(column=1, row=1)
-ent_destination.grid(column=2, columnspan=2, row=1)
+lbl_destination.grid(column=0, row=1, padx=8, pady=1)
+btn_selectDestFolder.grid(column=1, row=1, sticky=W, padx=8, pady=1)
+ent_destination.grid(column=1, row=1, padx=8, pady=1)
 
 # Row 2 - 3 : Sources 
 lbl_sources = Label(
 	master=frame,
-	text='Copy newest files from these locations:')
+	text='Copy newest files\nfrom these locations:',
+	bg=bgColor,
+	fg=textColor)
 btn_selectSourceFolder = Button(
 	master=frame,
 	text='Add source folder...',
+	highlightbackground=bgColor,
+	fg=btntxtColor,
 	command=selectSource)
 txt_sources = Text(
 	master=frame,
 	height='4',
-	width='25')
+	width='25',
+	highlightbackground=bgColor,
+	bg=fieldColor,
+	fg=btntxtColor)
 lbl_sources['font'] = myFont
 btn_selectSourceFolder['font'] = myFont
 txt_sources['font'] = myFont
-lbl_sources.grid(column=0, columnspan=2, row=2)
-btn_selectSourceFolder.grid(column=2, row=2)
-txt_sources.grid(column=0, columnspan=3, row=3, sticky='nwse', padx=5, pady=1)
+lbl_sources.grid(column=0, row=2, sticky=W, padx=8, pady=1)
+btn_selectSourceFolder.grid(column=1, row=2, sticky=W, padx=8, pady=1)
+txt_sources.grid(column=0, columnspan=2, row=3, sticky='nwse', padx=8, pady=1)
 
 # Row 4 - 5 : Options
 lbl_options = Label(
 	master=frame,
-	text='Options:')
+	text='Options:',
+	bg=bgColor,
+	fg=textColor)
 rdo_deleteOld = Radiobutton(
 	master=frame,
-	text='Delete old files in destination folder',
+	text='Delete old files\nin destination folder',
+	bg=bgColor,
+	fg=textColor,
 	variable=options,
 	value=1)
 rdo_backupOld = Radiobutton(
 	master=frame,
-	text='Backup old files in destination folder',
+	text='Backup old files\nin destination folder',
+	bg=bgColor,
+	fg=textColor,
 	variable=options,
 	value=2)
 lbl_options['font'] = myFont
 rdo_deleteOld['font'] = myFont
 rdo_backupOld['font'] = myFont
-lbl_options.grid(column=0, row=4)
-rdo_deleteOld.grid(column=1, columnspan=2, row=4)
-rdo_backupOld.grid(column=1, columnspan=2, row=5)
+lbl_options.grid(column=0, row=4, padx=8, pady=1)
+rdo_deleteOld.grid(column=1, row=4, padx=8, pady=1)
+rdo_backupOld.grid(column=1, row=5, padx=8, pady=1)
 
 # Row 6 : Submit
 btn_submit = Button(
 	master=frame,
 	text='CNSOLIDAT',
 	default='active',
-	height='1',
-	width='50',
+	height='2',
+	width='40',
+	highlightbackground=bgColor,
+	fg=btntxtColor,
 	command=submitForm)
 btn_submit['font'] = myFont
-btn_submit.grid(column=0, columnspan=3, row=6, padx=5, pady=5)
+btn_submit.grid(column=0, columnspan=2, row=6, padx=8, pady=5)
 
 root.mainloop() # waits for user input/events, any code after is blocked
 									# until window is closed
