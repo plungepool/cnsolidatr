@@ -15,11 +15,9 @@ Open the applet. Create a new file that'll hold all your settings for a project 
 
 ## What is there still to add?
 
-* Create optional backup of files currently in destination folder instead of moving to trash
 * Options for file extension and/or filename prefix
 * Specify the number of files to retrieve from each source folder
 * Alternative criteria for copying files besides last modified
-* Responsive UI
 * Expanded OS support
 
 ## Why make this?

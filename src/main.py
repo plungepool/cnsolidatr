@@ -22,7 +22,6 @@ def loadConfig():
 			else:
 				line = fp.readline()
 				txt_sources.insert(END, line)
-		# txt_sources.delete("1.0", "2.0")
 		txt_sources.delete("end-5c", END)
 		txt_sources.insert(END, '\n')
 		# options.set("B")
@@ -45,7 +44,10 @@ def selectSource():
 	txt_sources.insert(END, '\n')
 
 def submitForm():
-	global configLocation
+	if not ent_destination.get() or not txt_sources.get('1.0'):
+		messagebox.showerror(title="Error", message="Please select destination folder and at least one source folder.")
+	elif not configLocation:
+		saveConfigAs()
 	args = str(options.get())
 	configFile = open(configLocation, "w")
 	configFile.write(ent_destination.get() + "\n")
@@ -62,26 +64,16 @@ root = Tk()
 root.title('cnsolidtr') #sets window title
 myFont = font.Font(
 	family='Courier', 
-	size='18', 
-	weight='bold')
+	size='18')
 
-bgColor = '#457b9d'
-textColor = 'white'
+bgColor = 'white'
+textColor = 'black'
 btntxtColor = 'black'
-fieldColor = "#f1faee"
-
-# bgColor = '#023047'
-# textColor = 'white'
-# btntxtColor = 'black'
-# fieldColor = "#8ecae6"
-
-# bgColor = '#f4a261'
-# textColor = '#2a9d8f'
-# btntxtColor = '#264653'
-# fieldColor = "#f8c8a0"
+fieldColor = "#f0f0f0"
 
 #VARS
 global configLocation
+configLocation = ''
 destinationDir = StringVar()
 destinationDir.set("")
 sourceDir = StringVar()
@@ -147,7 +139,6 @@ ent_destination = Entry(
 	highlightbackground=bgColor,
 	bg=fieldColor,
 	fg=btntxtColor,
-	relief=SUNKEN,
 	textvariable=destinationDir)
 lbl_destination['font'] = myFont
 btn_selectDestFolder['font'] = myFont
@@ -164,7 +155,8 @@ lbl_sources = Label(
 	fg=textColor)
 btn_selectSourceFolder = Button(
 	master=frame,
-	text='Add source folder...',
+	text=' Add source folder... ',
+	height='2',
 	highlightbackground=bgColor,
 	fg=btntxtColor,
 	command=selectSource)
@@ -180,7 +172,7 @@ btn_selectSourceFolder['font'] = myFont
 txt_sources['font'] = myFont
 lbl_sources.grid(column=0, row=2, sticky=W, padx=8, pady=1)
 btn_selectSourceFolder.grid(column=1, row=2, sticky=W, padx=8, pady=1)
-txt_sources.grid(column=0, columnspan=2, row=3, sticky='nwse', padx=8, pady=1)
+txt_sources.grid(column=0, columnspan=2, row=3, sticky='nwse', padx=8, pady=8)
 
 # Row 4 - 5 : Options
 lbl_options = Label(
