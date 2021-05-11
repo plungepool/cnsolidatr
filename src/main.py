@@ -23,7 +23,6 @@ def loadConfig():
 				line = fp.readline()
 				txt_sources.insert(END, line)
 		txt_sources.delete("end-5c", END)
-		txt_sources.insert(END, '\n')
 		# options.set("B")
 	return configLocation
 
@@ -50,11 +49,11 @@ def submitForm():
 		saveConfigAs()
 	args = str(options.get())
 	configFile = open(configLocation, "w")
-	configFile.write(ent_destination.get() + "\n")
+	configFile.write(ent_destination.get())
 	configFile.close()
 	configFile = open(configLocation, "a")
 	configFile.write(txt_sources.get("1.0","end-1c"))
-	configFile.write("#end")
+	configFile.write("\n#end")
 	configFile.close()
 	subprocess.call(['./copyscript.sh', args, configLocation])
 	exit()
